@@ -658,7 +658,8 @@ maybe_patch_darwin() {
 }
 
 maybe_patch_catalina() {
-    xcode_version=$(/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -version | head -n 1 | awk '{print $2}')
+    xcodebuild=$(command -v xcodebuild)
+    xcode_version=$("$xcodebuild" -version | head -n 1 | awk '{print $2}')
     command_line_tools_version=$(xcode-select -v | awk '{print $3}' | sed 's/.$//')
     release="$1"
     otp_version="$2"
